@@ -8,7 +8,7 @@ Postgres database, and exposes it through a REST API.
 
 - **Phone number**: [TO BE ADDED once Vapi number is provisioned]
 - **API base URL**: [TO BE ADDED once deployed to Vercel]
-- **Repository**: [TO BE ADDED once pushed to GitHub]
+- **Repository**: https://github.com/jleague600/voice-patient-registration
 
 ## Architecture
 
