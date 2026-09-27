@@ -1,5 +1,5 @@
 {
-  "_comment": "Tool/function definitions configured in Vapi so the assistant can call our deployed REST API. Each tool's `server.url` should point to your deployed Vercel API base URL once live -- these are placeholders using localhost for local testing.",
+  "_comment": "Tool/function definitions configured in Vapi so the assistant can call our deployed REST API. server.url values point at the live Vercel deployment.",
 
   "tools": [
     {
@@ -19,7 +19,7 @@
         }
       },
       "server": {
-        "url": "https://YOUR-DEPLOYED-APP.vercel.app/patients",
+        "url": "https://voice-patient-registration-uk6t.vercel.app/patients",
         "method": "GET"
       }
     },
@@ -71,7 +71,7 @@
         }
       },
       "server": {
-        "url": "https://YOUR-DEPLOYED-APP.vercel.app/patients",
+        "url": "https://voice-patient-registration-uk6t.vercel.app/patients",
         "method": "POST"
       }
     },
@@ -108,7 +108,7 @@
         }
       },
       "server": {
-        "url": "https://YOUR-DEPLOYED-APP.vercel.app/patients/{patient_id}",
+        "url": "https://voice-patient-registration-uk6t.vercel.app/patients/{patient_id}",
         "method": "PUT"
       }
     }
