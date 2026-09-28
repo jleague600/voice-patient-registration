@@ -7,7 +7,7 @@ Postgres database, and exposes it through a REST API.
 ## Live Demo
 
 - **Phone number**: +1 (320) 703 4084
-- **API base URL**: https://voice-patient-registration-uk6t.vercel.app
+- **API base URL**: https://voice-patient-registration-five.vercel.app
 - **Repository**: https://github.com/jleague600/voice-patient-registration
 
 ## Architecture
