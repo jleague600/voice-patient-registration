@@ -6,6 +6,7 @@ from app.core.validators import is_valid_name, is_valid_us_state, is_valid_zip, 
 VALID_SEX_VALUES = {"Male", "Female", "Other", "Decline to Answer"}
 
 
+# These are the common fields for both create and update requests.
 class PatientBase(BaseModel):
     """Shared fields/validation used by both create and update schemas."""
 
@@ -69,11 +70,13 @@ class PatientBase(BaseModel):
         return v
 
 
+# Used when creating a new patient. All required values must be there.
 class PatientCreate(PatientBase):
     """Shape required for POST /patients -- all required fields must be present."""
     pass
 
 
+# Used for updating a patient. Not all fields are required here.
 class PatientUpdate(BaseModel):
     """
     Shape for PUT /patients/:id -- every field optional, since partial
@@ -143,6 +146,7 @@ class PatientUpdate(BaseModel):
         return v
 
 
+# This is used for the duplicate check call by the voice agent.
 class PatientLookup(BaseModel):
     """Request body for POST /patients/lookup (used by the voice agent's duplicate check)."""
 
@@ -153,6 +157,8 @@ class PatientLookup(BaseModel):
     def validate_phone(cls, v: str) -> str:
         return normalize_phone(v)
 
+
+# This is the response format when we return a patient record to client.
 class PatientOut(PatientBase):
     """Shape returned to clients -- includes auto-generated fields."""
 
@@ -160,9 +166,10 @@ class PatientOut(PatientBase):
     created_at: datetime
     updated_at: datetime
 
-    model_config = {"from_attributes": True}  # lets this be built directly from a Patient ORM object
+    model_config = {"from_attributes": True}  # this lets us turn ORM object directly into response
 
 
+# This is the format used by all API responses.
 class APIResponse(BaseModel):
     """Consistent response envelope required by the spec: { "data": ..., "error": null }"""
 

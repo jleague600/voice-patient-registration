@@ -7,6 +7,7 @@ from app.models.patient import Patient
 from app.models.schemas import PatientCreate, PatientUpdate
 
 
+# Create a new patient record in the DB.
 async def create_patient(db: AsyncSession, data: PatientCreate) -> Patient:
     """Insert a new patient record. Assumes `data` is already validated by Pydantic."""
     patient = Patient(**data.model_dump())
@@ -16,6 +17,7 @@ async def create_patient(db: AsyncSession, data: PatientCreate) -> Patient:
     return patient
 
 
+# Get one patient by ID, but ignore soft-deleted records.
 async def get_patient_by_id(db: AsyncSession, patient_id: uuid.UUID) -> Patient | None:
     """Fetch a single active (not soft-deleted) patient by ID."""
     result = await db.execute(
@@ -24,6 +26,7 @@ async def get_patient_by_id(db: AsyncSession, patient_id: uuid.UUID) -> Patient 
     return result.scalar_one_or_none()
 
 
+# Look for a patient using phone number. This is used for duplicate check.
 async def find_patient_by_phone(db: AsyncSession, phone_number: str) -> Patient | None:
     """
     Look up an active patient by phone number. Used for the duplicate-
@@ -40,6 +43,7 @@ async def find_patient_by_phone(db: AsyncSession, phone_number: str) -> Patient 
     return result.scalars().first()
 
 
+# List all active patients. Optional filters are used by the API.
 async def list_patients(
     db: AsyncSession,
     last_name: str | None = None,
@@ -64,6 +68,7 @@ async def list_patients(
     return list(result.scalars().all())
 
 
+# Update only the fields that the caller sends. This is a partial update.
 async def update_patient(db: AsyncSession, patient_id: uuid.UUID, data: PatientUpdate) -> Patient | None:
     """
     Partial update -- only fields the caller actually provided are
@@ -83,6 +88,7 @@ async def update_patient(db: AsyncSession, patient_id: uuid.UUID, data: PatientU
     return patient
 
 
+# Soft delete means we keep the record but mark it as deleted.
 async def soft_delete_patient(db: AsyncSession, patient_id: uuid.UUID) -> Patient | None:
     """Sets deleted_at instead of removing the row, per the spec's soft-delete requirement."""
     patient = await get_patient_by_id(db, patient_id)
