@@ -6,8 +6,8 @@ Postgres database, and exposes it through a REST API.
 
 ## Live Demo
 
-- **Phone number**: [TO BE ADDED once Vapi number is provisioned]
-- **API base URL**: [TO BE ADDED once deployed to Vercel]
+- **Phone number**: +1 (320) 703 4084
+- **API base URL**: https://voice-patient-registration-five.vercel.app
 - **Repository**: https://github.com/jleague600/voice-patient-registration
 
 ## Architecture
@@ -101,5 +101,5 @@ Visit `http://127.0.0.1:8000/docs` for interactive API testing.
 
 ### Environment Variables
 
-See `.env.example` for the full list.
+See `.env` for the full list.
 

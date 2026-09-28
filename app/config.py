@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
     # --- Database ---
     # Use Supabase's CONNECTION POOLER string (port 6543), not the direct
@@ -26,6 +25,4 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-
-# Single shared instance — import this, don't instantiate Settings() elsewhere.
 settings = Settings()

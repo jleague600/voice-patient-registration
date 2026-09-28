@@ -14,13 +14,6 @@ ZIP_PATTERN = re.compile(r"^\d{5}(-\d{4})?$")
 
 
 def normalize_phone(raw: str) -> str:
-    """
-    Strips formatting from a phone number, returning digits only.
-    Raises ValueError if the result isn't a valid 10-digit US number.
-    Used by Pydantic validators AND by the service layer when looking
-    up an existing patient by phone (so "(555) 123-4567" and
-    "555-123-4567" match the same stored record).
-    """
     digits = re.sub(r"\D", "", raw)
     if len(digits) != 10:
         raise ValueError("phone number must be a valid 10-digit US number")

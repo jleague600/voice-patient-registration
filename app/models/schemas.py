@@ -1,20 +1,6 @@
-"""
-Pydantic schemas -- these define what the API accepts as input and
-returns as output. Kept separate from app/models/patient.py (the
-database table definition) on purpose: the DB model can have fields
-you never want exposed over the API, and the API can validate/shape
-data differently than how it's stored.
-
-Reusable validation logic (name format, US state, zip, phone
-normalization) lives in app/core/validators.py and is imported here
-rather than duplicated across PatientCreate and PatientUpdate.
-"""
-
 import uuid
 from datetime import date, datetime
-
 from pydantic import BaseModel, EmailStr, Field, field_validator
-
 from app.core.validators import is_valid_name, is_valid_us_state, is_valid_zip, normalize_phone
 
 VALID_SEX_VALUES = {"Male", "Female", "Other", "Decline to Answer"}

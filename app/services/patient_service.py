@@ -1,9 +1,7 @@
 import uuid
 from datetime import datetime, timezone
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.validators import normalize_phone
 from app.models.patient import Patient
 from app.models.schemas import PatientCreate, PatientUpdate
