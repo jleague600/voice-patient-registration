@@ -19,8 +19,8 @@
         }
       },
       "server": {
-        "url": "https://voice-patient-registration-uk6t.vercel.app/patients",
-        "method": "GET"
+        "url": "https://voice-patient-registration-uk6t.vercel.app/patients/lookup",
+        "method": "POST"
       }
     },
     {

@@ -29,15 +29,17 @@ async def get_patient_by_id(db: AsyncSession, patient_id: uuid.UUID) -> Patient 
 async def find_patient_by_phone(db: AsyncSession, phone_number: str) -> Patient | None:
     """
     Look up an active patient by phone number. Used for the duplicate-
-    detection bonus: the voice agent checks this before creating a new
-    record, so a returning caller gets offered an update instead of a
-    duplicate entry.
+    detection bonus. Returns the most recently created match, so it
+    doesn't crash if test data left several patients with the same number.
     """
     normalized = normalize_phone(phone_number)
     result = await db.execute(
-        select(Patient).where(Patient.phone_number == normalized, Patient.deleted_at.is_(None))
+        select(Patient)
+        .where(Patient.phone_number == normalized, Patient.deleted_at.is_(None))
+        .order_by(Patient.created_at.desc())
+        .limit(1)
     )
-    return result.scalar_one_or_none()
+    return result.scalars().first()
 
 
 async def list_patients(

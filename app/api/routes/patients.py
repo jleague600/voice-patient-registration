@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_session
 from app.core.logging import log_event
-from app.models.schemas import APIResponse, PatientCreate, PatientOut, PatientUpdate
+from app.models.schemas import APIResponse, PatientCreate, PatientLookup, PatientOut, PatientUpdate
 from app.services import patient_service
 
 router = APIRouter(prefix="/patients", tags=["patients"])
@@ -24,6 +24,16 @@ async def list_patients(
     )
     return APIResponse(data=[PatientOut.model_validate(p) for p in patients])
 
+
+@router.post("/lookup", response_model=APIResponse)
+async def lookup_patient(data: PatientLookup, db: AsyncSession = Depends(get_session)):
+    """Duplicate check for the voice agent: returns found=true/false plus the record if found."""
+    patient = await patient_service.find_patient_by_phone(db, data.phone_number)
+    if patient is None:
+        return APIResponse(data={"found": False})
+    return APIResponse(
+        data={"found": True, "patient": PatientOut.model_validate(patient).model_dump(mode="json")}
+    )
 
 @router.get("/{patient_id}", response_model=APIResponse)
 async def get_patient(patient_id: uuid.UUID, db: AsyncSession = Depends(get_session)):

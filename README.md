@@ -52,6 +52,7 @@ The `patients` table implements the full spec's field list, with:
 | POST | `/patients` | Create a new patient. Returns the created record with `patient_id`. |
 | PUT | `/patients/{id}` | Partial update of an existing patient. |
 | DELETE | `/patients/{id}` | Soft-delete (sets `deleted_at`; does not remove the row). |
+| POST | `/patients/lookup` | Duplicate check by phone number. Returns `{found: true/false}` plus the record if found. Used by the voice agent. |
 
 All responses use the envelope `{ "data": ..., "error": ... }`. Validation
 errors return `422` with details on every failing field; missing records
@@ -101,3 +102,4 @@ Visit `http://127.0.0.1:8000/docs` for interactive API testing.
 ### Environment Variables
 
 See `.env.example` for the full list.
+

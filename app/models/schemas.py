@@ -157,6 +157,16 @@ class PatientUpdate(BaseModel):
         return v
 
 
+class PatientLookup(BaseModel):
+    """Request body for POST /patients/lookup (used by the voice agent's duplicate check)."""
+
+    phone_number: str
+
+    @field_validator("phone_number")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        return normalize_phone(v)
+
 class PatientOut(PatientBase):
     """Shape returned to clients -- includes auto-generated fields."""
 
