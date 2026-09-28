@@ -103,3 +103,11 @@ Visit `http://127.0.0.1:8000/docs` for interactive API testing.
 
 See `.env` for the full list.
 
+### Next Steps
+
+The project was implemented as a complete backend + API + voice-agent integration, and the next step was to run a full end-to-end validation by calling the Vapi number, confirming the live conversation flow, and verifying the patient data persisted correctly in the database.
+
+I planned to test this thoroughly through the live telephony flow, but my Vapi free credits were exhausted during the initial testing and tool-call setup stage. Because of that, I was not able to complete a fresh full live call test before submission. I am submitting the working codebase in its current state with the architecture and implementation in place, along with the required API and deployment details.
+
+If this were to continue, the next priority would be a complete live call test, duplicate-handling validation, and a final pass on edge-case behavior and prompt tuning.
+
