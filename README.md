@@ -96,10 +96,6 @@ uvicorn app.main:app --reload
 ```
 Visit `http://127.0.0.1:8000/docs` for interactive API testing.
 
-### Environment Variables
-
-See `.env` for the full list.
-
 ### Next Steps
 
 The project was implemented as a complete backend + API + voice-agent integration, and the next step was to run a full end-to-end validation by calling the Vapi number, confirming the live conversation flow, and verifying the patient data persisted correctly in the database.
