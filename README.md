@@ -90,9 +90,6 @@ venv\Scripts\Activate.ps1        # Windows
 pip install -r requirements.txt
 ```
 
-Copy `.env.example` to `.env` and fill in real values (see Environment
-Variables below).
-
 Run locally:
 ```bash
 uvicorn app.main:app --reload
